@@ -13,12 +13,12 @@ repos:
         name: ruff
         entry: uv run ruff check
         language: system
-        pass_filenames: false
+        files: \.py$
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
-      - id: trailing-whitespace  # Remove espaços em branco no final das linhas
+      - id: trailing-whitespace
         name: Trim trailing whitespace
-      - id: end-of-file-fixer  # Garante uma linha vazia no final do arquivo
+      - id: end-of-file-fixer
         name: Fix end of files

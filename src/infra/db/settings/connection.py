@@ -1,4 +1,7 @@
 from sqlalchemy import create_engine, Engine
+from typing import Self, Optional
+from sqlalchemy.orm import sessionmaker, Session
+
 
 class DBConnectionHandler:
     """Classe de conexão com o banco
@@ -16,6 +19,7 @@ class DBConnectionHandler:
             'clean_database'
         )
         self.__engine: Engine = self.__create_database_engine()
+        self.session: Optional[Session] = None
 
     def __create_database_engine(self)-> Engine:
         """Cria engine
@@ -24,9 +28,19 @@ class DBConnectionHandler:
         engine: Engine = create_engine(self.__connection_string)
         return engine
 
-    def get__engine(self)-> Engine:
-        """Retorna a engine
+    def get__engine(self) -> Engine:
+        """
+        Cria uma sessão e retorna o próprio objeto.
 
-        :return Engine: Engine da conexão com o banco
+        :return MinhaClasse: Instância da própria classe com a sessão criada.
         """
         return self.__engine
+
+    def __enter__(self) -> Self:
+        session_maker = sessionmaker(bind=self.__engine)
+        self.session = session_maker()
+        return self
+
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.session.close()

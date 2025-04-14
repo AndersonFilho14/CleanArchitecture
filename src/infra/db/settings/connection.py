@@ -1,6 +1,8 @@
-from sqlalchemy import create_engine, Engine
 from typing import Self, Optional
+from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
+
+from src.infra.db.settings.base import Base
 
 
 class DBConnectionHandler:
@@ -10,15 +12,9 @@ class DBConnectionHandler:
         """asd
 
         """
-        self.__connection_string = "{}://{}:{}@{}:{}/{}".format(
-            'mysql+pymysql',
-            'root',
-            '1234',
-            'localhost',
-            '3306',
-            'clean_database'
-        )
+        self.__connection_string = "sqlite:///users.db"
         self.__engine: Engine = self.__create_database_engine()
+        Base.metadata.create_all(self.__engine)
         self.session: Optional[Session] = None
 
     def __create_database_engine(self)-> Engine:

@@ -3,3 +3,6 @@
 .env
 
 .vscode/
+
+#Banco utilizado
+*.db

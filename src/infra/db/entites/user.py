@@ -11,4 +11,4 @@ class Users(Base):
     age = Column(Integer, nullable=True)
 
     def __repr__(self) -> str:
-        return f"Users [id={self.id}, first_name={self.first_name}]"
+        return f"\nUsers [id={self.id}, first_name={self.first_name} ]"

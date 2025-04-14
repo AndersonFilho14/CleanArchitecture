@@ -35,7 +35,7 @@ def test_insert_user() -> None:
 
 
 @pytest.mark.skip(reason="Sensive test")
-def test_select_user():
+def test_select_user() -> None:
     mocked_first_name = 'first_2'
     mocked_last_name = 'last_2'
     mocked_age = 51

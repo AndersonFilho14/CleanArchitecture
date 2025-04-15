@@ -1,12 +1,15 @@
-from src.infra.db.settings.connection import DBConnectionHandler
+from src.domain.models.users import Users
 from src.infra.db.entites.user import Users as UsersEntity
+from src.infra.db.settings.connection import DBConnectionHandler
+from src.data.interfaces.users_repositories import UsersRepositoryInterface
 
 
-class UsersRepository:
+class UsersRepository(UsersRepositoryInterface):
 
     @classmethod
     def insert_user(cls, first_name:str, last_name: str, age:int ) -> None:
         with DBConnectionHandler() as database:
+            assert database.session is not None
             try:
                 registro_novo = UsersEntity(
                     first_name= first_name,
@@ -21,8 +24,9 @@ class UsersRepository:
 
 
     @classmethod
-    def select_user(cls, first_name: str) -> list[UsersEntity]:
+    def select_user(cls, first_name: str) -> list[Users]:
         with DBConnectionHandler() as database:
+            assert database.session is not None
             try:
                 users = (
                     database.session

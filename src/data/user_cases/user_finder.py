@@ -1,6 +1,6 @@
 from src.domain.models.users import Users
 from src.data.interfaces.users_repositories import UsersRepositoryInterface
-from src.domain.models.user_cases.user_finder import UserFinder as UserFinderInterface
+from src.domain.user_cases.user_finder import UserFinder as UserFinderInterface
 
 class UserFider(UserFinderInterface):
     def __init__(self, users_repositories: UsersRepositoryInterface) -> None:
@@ -15,7 +15,7 @@ class UserFider(UserFinderInterface):
 
     @classmethod
     def __validar_nome(cls, first_name:str) -> None:
-        
+
         if not first_name.isalpha():
             raise Exception("Nome invalido para o find")
 

@@ -10,12 +10,12 @@ def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse
 
     if request.data: body = request.json
 
-    http_request: HttpRequest = HttpRequest(
-        body= body,
-        headers= request.headers,
-        query_params= request.args,
-        path_params= request.view_args,
-        url= request.full_path
+    http_request = HttpRequest(
+        body=body,
+        headers=request.headers,
+        query_params=request.args,
+        path_params=request.view_args,
+        url=request.full_path
     )
     http_response = controller(http_request)
     return http_response

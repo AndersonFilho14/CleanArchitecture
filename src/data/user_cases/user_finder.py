@@ -1,6 +1,7 @@
 from src.domain.models.users import Users
 from src.data.interfaces.users_repositories import UsersRepositoryInterface
 from src.domain.user_cases.user_finder import UserFinder as UserFinderInterface
+from src.errors.types import HttpBadRequestError, HttpNotFoundError
 
 class UserFider(UserFinderInterface):
     def __init__(self, users_repositories: UsersRepositoryInterface) -> None:
@@ -17,15 +18,15 @@ class UserFider(UserFinderInterface):
     def __validar_nome(cls, first_name:str) -> None:
 
         if not first_name.isalpha():
-            raise Exception("Nome invalido para o find")
+            raise HttpBadRequestError("Nome invalido para o find")
 
         if len(first_name) > 21:
-            raise Exception("Nome muito grande")
+            raise HttpBadRequestError("Nome muito grande")
 
     def __search_user(self, first_name:str) -> list:
         users = self.__users_repositories.select_user(first_name= first_name)
         if users == []:
-            raise Exception("User não encontrado")
+            raise HttpNotFoundError("User não encontrado")
         return users
 
     @classmethod

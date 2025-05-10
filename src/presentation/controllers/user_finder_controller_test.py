@@ -17,4 +17,3 @@ def test_handler():
     assert isinstance(retorno, HttpResponse)
     assert retorno.status_code == 200
     assert retorno.body["data"] is not None
-#testando code sp

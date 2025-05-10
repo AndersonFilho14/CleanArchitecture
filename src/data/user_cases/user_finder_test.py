@@ -22,7 +22,7 @@ def test_find_error_validar_nome():
     user_finder = UserFider(repositorio)
 
     try:
-        finder = user_finder.find(first_name= first_name)
+        user_finder.find(first_name= first_name)
         assert False
     except Exception as e:
         assert str(e) == "Nome invalido para o find"
@@ -34,7 +34,7 @@ def test_find_error_long():
     user_finder = UserFider(repositorio)
 
     try:
-        finder = user_finder.find(first_name= first_name)
+        user_finder.find(first_name= first_name)
         assert False
     except Exception as e:
         assert str(e) == "Nome muito grande"
@@ -50,7 +50,7 @@ def test_find_error_nao_ter_user ():
     user_finder = UserFider(repositorio)
 
     try:
-        finder = user_finder.find(first_name= first_name)
+        user_finder.find(first_name= first_name)
         assert False
     except Exception as e:
         assert str(e) == "User não encontrado"

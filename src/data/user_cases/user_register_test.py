@@ -28,4 +28,4 @@ def test_register_name_error():
         user_register.registrar(first_name= first_name, last_name= last_name , age= age)
         assert False
     except Exception as e:
-        assert str(e) == "Nome invalido para o find"
+        assert str(e) == "Nome invalido para o cadastro"
